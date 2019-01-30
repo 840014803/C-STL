@@ -1,0 +1,48 @@
+mysql> use RUNOOB;
+Database changed
+mysql> CREATE TABLE runoob_transaction_test( id int(5)) engine=innodb;  # 创建数据表
+Query OK, 0 rows affected (0.04 sec)
+ 
+mysql> select * from runoob_transaction_test;
+Empty set (0.01 sec)
+ 
+mysql> begin;  # 开始事务
+Query OK, 0 rows affected (0.00 sec)
+ 
+mysql> insert into runoob_transaction_test value(5);
+Query OK, 1 rows affected (0.01 sec)
+ 
+mysql> insert into runoob_transaction_test value(6);
+Query OK, 1 rows affected (0.00 sec)
+ 
+mysql> commit; # 提交事务
+Query OK, 0 rows affected (0.01 sec)
+ 
+mysql>  select * from runoob_transaction_test;
++------+
+| id   |
++------+
+| 5    |
+| 6    |
++------+
+2 rows in set (0.01 sec)
+ 
+mysql> begin;    # 开始事务
+Query OK, 0 rows affected (0.00 sec)
+ 
+mysql>  insert into runoob_transaction_test values(7);
+Query OK, 1 rows affected (0.00 sec)
+ 
+mysql> rollback;   # 回滚
+Query OK, 0 rows affected (0.00 sec)
+ 
+mysql>   select * from runoob_transaction_test;   # 因为回滚所以数据没有插入
++------+
+| id   |
++------+
+| 5    |
+| 6    |
++------+
+2 rows in set (0.01 sec)
+ 
+mysql>
